@@ -1,0 +1,180 @@
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  @include box-shadow(
+                  0 1px 3px 0 rgba($black, 0.2),
+                  0 2px 1px -1px rgba($black, 0.12),
+                  0 1px 1px 0 rgba($black, 0.14));
+
+  &__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: $color-default;
+  }
+
+  &__badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 24px;
+    text-align: center;
+    color: $white;
+    line-height: 24px;
+    background-color: #ee1d62;
+  }
+
+  &__picture {
+    height: 195px;
+    background-color: rgba($black, 1);
+
+    > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      vertical-align: top;
+    }
+  }
+
+  &__info {
+    position: relative;
+    padding: {
+      top: 16 + 6px;
+      right: 16px;
+      bottom: 16px;
+      left: 16px;
+    };
+    background-color: $white;
+  }
+
+  &__progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-color: $line;
+
+    .guide {
+      position: absolute;
+      top: -30px;
+      display: inline-block;
+      height: 24px;
+      padding: 0 6px;
+      line-height: 24px;
+      vertical-align: middle;
+      text-align: center;
+      color: $white;
+      background-color: $color-point;
+      font-size: 12px;
+      @include radius(4px);
+      @include box-shadow(
+                      0 1px 3px 0 rgba(0, 0, 0, 0.3),
+                      0 2px 1px -1px rgba(0, 0, 0, 0.2),
+                      0 1px 1px 0 rgba(0, 0, 0, 0.2));
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        display: inline-block;
+        border: 6px solid transparent;
+        border-top-color: $color-point;
+      }
+
+      &::before {
+        left: 0;
+        border-left-color: $color-point;
+      }
+
+      &::after {
+        right: 0;
+        border-right-color: $color-point;
+      }
+    }
+
+    .value {
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(to right, #5ac3fc, #3d6afe);
+    }
+  }
+
+  &__tag {
+    margin-bottom: 4px;
+
+    .tag {
+      display: inline-block;
+      height: 24px;
+      padding: 0 4px;
+      line-height: 24px;
+      text-align: center;
+      background-color: #f7f7f7;
+      font-size: 12px;
+      color: $color-light;
+      @include radius(5px);
+    }
+  }
+
+  &__digit {
+    $parent: &;
+    margin-bottom: 4px;
+    line-height: 45px;
+
+    #{$parent}__item {
+      display: inline-block;
+      line-height: 1.0;
+      vertical-align: middle;
+      font-size: 20px;
+      font-weight: bold;
+      color: rgba($black, 0.87);
+
+      &:first-child::before {
+        display: none;
+      }
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 14px;
+        margin: 0 15px;
+        background-color: rgba($black, 0.6);
+      }
+    }
+
+    .rate {
+      display: inline-block;
+      vertical-align: middle;
+      color: $color-point;
+      font-weight: bold;
+      font-size: 30px;
+    }
+  }
+
+  &__title {
+    display: block;
+    height: 45px;
+    line-height: 1.5;
+    color: rgba($black, 0.87);
+    font-weight: normal;
+    font-size: 16px;
+  }
+
+  &__button {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn {
+      min-width: 155px;
+    }
+  }
+}

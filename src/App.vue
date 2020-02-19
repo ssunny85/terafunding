@@ -21,4 +21,4 @@ export default {
 };
 </script>
 
-<style src="./assets/scss/common.scss" lang="scss" />
+<style src="./assets/scss/terafunding.scss" lang="scss" />
