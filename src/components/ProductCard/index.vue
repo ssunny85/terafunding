@@ -5,12 +5,12 @@
         마감임박
       </span>
       <p class="card__picture">
-        <img :src="product.url" alt="">
+        <img :src="product.url" :alt="`${product.title} 건물 이미지`">
       </p>
       <div class="card__info">
         <div class="card__progress-bar">
           <span class="blind">현재 달성률:</span>
-          <p class="guide"
+          <p :class="['guide', isCurrentRateRightClass ? 'right-position' : 'left-position']"
              v-if="product.currentRate"
              :style="currentRatePosition">
             {{ product.currentRate }}% 달성
@@ -61,6 +61,8 @@
 </template>
 
 <script>
+const POSITION_LIMIT = 80;
+
 export default {
   name: 'ProductCard',
   props: {
@@ -78,8 +80,13 @@ export default {
       return `width: ${this.product.currentRate}%`;
     },
     currentRatePosition() {
-      const ratio = (350 * this.product.currentRate) / 100;
-      return `left: ${ratio}px`;
+      const rightPosition = 100 - this.product.currentRate;
+      return this.product.currentRate <= POSITION_LIMIT
+        ? `left: ${this.product.currentRate}%`
+        : `right: ${rightPosition}%`;
+    },
+    isCurrentRateRightClass() {
+      return this.product.currentRate > POSITION_LIMIT;
     },
   },
   filters: {

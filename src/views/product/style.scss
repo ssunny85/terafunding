@@ -9,8 +9,6 @@
 }
 
 .product {
-  $parent: &;
-
   &__total {
     font-size: 16px;
   }
