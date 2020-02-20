@@ -1,4 +1,4 @@
-# terafunding
+# 테라펀딩 테스트
 
 ## Project setup
 ```
