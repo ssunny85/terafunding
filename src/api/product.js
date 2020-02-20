@@ -342,29 +342,29 @@ const data = {
 };
 
 export default function getProducts(request) {
-  console.log('request: ', JSON.stringify(request, null, 2));
-
+  const { contractTypes } = request.criteria;
+  if (!contractTypes) {
+    throw new Error('contractTypes는 필수 값 입니다.');
+  }
+  const { typedStatuses } = request.criteria;
+  if (!typedStatuses) {
+    throw new Error('typedStatuses는 필수 값 입니다.');
+  }
   let products = data.list
-    .sort((a, b) => a.id - b.id)
-    .sort((a, b) => b.rateOfReturn - a.rateOfReturn)
     .filter((product) => {
-      const { contractTypes } = request.criteria;
       if (contractTypes.length > 0) {
         return contractTypes.includes(product.contractType);
       }
       return true;
     })
     .filter((product) => {
-      const { typedStatuses } = request.criteria;
       if (typedStatuses.length > 0) {
         return typedStatuses.includes(product.typedStatus);
       }
       return true;
     })
-    .map((product, index) => ({
-      seq: index,
-      ...product,
-    }));
+    .sort((a, b) => a.id - b.id)
+    .sort((a, b) => b.rateOfReturn - a.rateOfReturn);
 
   const productTotal = products.length;
   const pageLimit = parseInt(request.paging.limit, 10);
@@ -375,8 +375,7 @@ export default function getProducts(request) {
   }
   const startSeq = (pageNo - 1) * pageLimit;
   const endSeq = (pageNo * pageLimit);
-  products = products
-    .filter((product) => startSeq <= product.seq && product.seq < endSeq);
+  products = products.slice(startSeq, endSeq);
 
   return {
     error: data.error,
